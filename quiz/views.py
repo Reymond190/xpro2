@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_control
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import FormView
 from .forms import QuestionForm
@@ -11,6 +12,7 @@ from .models import Quiz, Category, Progress, Sitting, Question
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .forms import myform, UserRegisterForm
 
 
 class QuizMarkerMixin(object):
@@ -236,34 +238,66 @@ class QuizTake(FormView):
 
 
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required
 def index(request):
-    return render(request, 'index.html', {})
+    form = myform
+    if request.method == 'POST':
+        form = myform(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+    context = {'form': form}
+    return render(request, 'index.html', context)
 
 
-def login_user(request):
+# def login_user(request):
+#
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             messages.success(request, 'You have successfully logged in')
+#             return redirect("index")
+#         else:
+#             messages.success(request, 'Error logging in')
+#             return redirect('login')
+#     else:
+#         return render(request, 'login.html', {})
+
+
+# def logout_user(request):
+#     logout(request)
+#     messages.success(request, 'You have been logged out!')
+#     print('logout function working')
+#     return redirect('login')
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required
+def one(request):
+    form = myform
 
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, 'You have successfully logged in')
-            return redirect("index")
-        else:
-            messages.success(request, 'Error logging in')
+        form = myform(request.POST)
+        form.save(commit=True)
+        print('just saved!!!')
+    print('not inside if')
+    context = {'form':form}
+    return  render(request,'hah.html',context)
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username= username, password = password)
+            # messages.success(request,f'Your account has been created {username}! Login to continue!')
             return redirect('login')
     else:
-        return render(request, 'login.html', {})
-
-
-def logout_user(request):
-    logout(request)
-    messages.success(request, 'You have been logged out!')
-    print('logout function working')
-    return redirect('login')
-
-def one(request):
-    return  render(request,'templates/hah.html')
-
+        form = UserRegisterForm()
+    context = {'form': form}
+    return render(request, 'registration/register.html', context)

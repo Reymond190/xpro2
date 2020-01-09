@@ -621,6 +621,7 @@ def csv_upload_post_save(sender, instance, created, *args, **kwargs):
             # messages.success(parsed_items)
             print(parsed_items)
         csv_uploaded.send(sender=instance, user=instance.user, csv_file_list=parsed_items)
+
         ''' 
         if using a model directly
         for line in reader:
@@ -632,7 +633,8 @@ def csv_upload_post_save(sender, instance, created, *args, **kwargs):
                 setattr(new_obj, key) = item
                 i+=1
             new_obj.save()
-        ''' 
+        '''
+
         instance.completed = True
         instance.save()
 

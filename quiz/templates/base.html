@@ -94,25 +94,25 @@
               <li class="nav-item">
                 <a class="nav-link " href="index.html">
                   <i class="material-icons">edit</i>
-                  <span>Blog Dashboard</span>
+                  <span>Dashboard</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " href="components-blog-posts.html">
                   <i class="material-icons">vertical_split</i>
-                  <span>Blog Posts</span>
+                  <span>Quizzes</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " href="add-new-post.html">
                   <i class="material-icons">note_add</i>
-                  <span>Add New Post</span>
+                  <span>Progress/results</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " href="form-components.html">
                   <i class="material-icons">view_module</i>
-                  <span>Forms &amp; Components</span>
+                  <span>Create Tests</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -124,13 +124,13 @@
               <li class="nav-item">
                 <a class="nav-link " href="user-profile-lite.html">
                   <i class="material-icons">person</i>
-                  <span>User Profile</span>
+                  <span>Profile</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " href="errors.html">
                   <i class="material-icons">error</i>
-                  <span>Errors</span>
+                  <span>Settings</span>
                 </a>
               </li>
             </ul>
@@ -189,8 +189,9 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle mr-2" src="{% static 'images/avatars/0.jpg' %}" alt="User Avatar">
-                    <span class="d-none d-md-inline-block">Sierra Brooks</span>
-                  </a>
+                    {% if user.is_authenticated %}
+                     <span class="d-none d-md-inline-block">{{ user.get_username }}</span>
+                      </a>
                   <div class="dropdown-menu dropdown-menu-small">
                     <a class="dropdown-item" href="user-profile-lite.html">
                       <i class="material-icons">&#xE7FD;</i> Profile</a>
@@ -199,9 +200,14 @@
                     <a class="dropdown-item" href="add-new-post.html">
                       <i class="material-icons">note_add</i> Add New Post</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">
+                    <a class="dropdown-item text-danger" href="{% url 'logout1' %}">
                       <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                   </div>
+                    {% else %}
+                     <span class="d-none d-md-inline-block">log in</span>
+                    {% endif %}
+
+
                 </li>
               </ul>
               <nav class="nav">
@@ -214,12 +220,12 @@
           <!-- / .main-navbar -->
           <div class="main-content-container container-fluid px-4">
             <!-- Page Header -->
-            <div class="page-header row no-gutters py-4">
-              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Overview</span>
-                <h3 class="page-title">Data Tables</h3>
-              </div>
-            </div>
+            <!--<div class="page-header row no-gutters py-4">-->
+              <!--<div class="col-12 col-sm-4 text-center text-sm-left mb-0">-->
+                <!--<span class="text-uppercase page-subtitle">Overview</span>-->
+                <!--<h3 class="page-title">Data Tables</h3>-->
+              <!--</div>-->
+            <!--</div>-->
 
             <!--resthere-->
 
@@ -289,8 +295,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-    <script src="scripts/extras.1.1.0.min.js"></script>
-    <script src="scripts/shards-dashboards.1.1.0.min.js"></script>
+    <!--<script src="{% static 'js/extras.1.1.0.min.js' %}"></script>-->
+    <!--<script src="{% static 'js/shards-dashboards.1.1.0.min.js' %}"></script>-->
   </body>
 </html>
 

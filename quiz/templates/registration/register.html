@@ -1,0 +1,41 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <title>registration</title>
+    <style>
+        .form-control1{
+
+        border:none;
+    border-radius: none}
+    </style>
+</head>
+<body>
+
+            <div class="col-md-5">
+          <div class="content-section"><br>
+            <div><p class="display-4" style="font-size:35px;">Registration</p></div>
+           <form method="post" class="form-control1" action="{% url 'register' %}">
+    {% csrf_token %}
+    <fieldset class="form-group">
+         <legend>
+             <div class="small">{{ form|crispy }}</div>
+         </legend>
+        <div class="form-group">
+        <input type="submit" value="Register" class="btn btn-primary"><br>
+        <small class="text-muted">
+                      Already Have an Account<a class="ml-2" href="{% url 'login' %}"> Sign In now</a>
+                  </small>
+    </div>
+            </fieldset>
+
+
+
+</form>
+
+          </div>
+        </div>
+
+{% endblock %}

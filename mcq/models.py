@@ -34,6 +34,7 @@ class MCQQuestion(Question):
         if self.answer_order == 'none':
             return queryset.order_by('None')
 
+
     def get_answers(self):
         return self.order_answers(Answer.objects.filter(question=self))
 

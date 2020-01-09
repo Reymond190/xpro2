@@ -1,11 +1,17 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<h1>This is my index page</h1>
-{% if user.is_authenticated %}
-    <p>Username: {{user.username}}</p>
-    <p>Name: {{user.first_name}} {{user.last_name}}</p>
-    <p>Email: {{user.email}}</p>
-{% endif %}
+<div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Quizzes</span>
+                <h3 class="page-title">Create Quiz</h3>
+              </div>
+            </div>
+<form method="post" class="form-group" action="{% url 'index' %}">
+    {% csrf_token %}
+    {{form|crispy}}
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+
     
 {% endblock  %}

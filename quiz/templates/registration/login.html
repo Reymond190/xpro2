@@ -1,0 +1,37 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+<head>
+    <title>Login</title>
+    <style>
+        .form-control{border: none;
+     border-radius: none}
+
+    .col-form-label {float:left;}
+    </style>
+</head>
+{% block content %}
+<body><br><br>
+<div class="container-fluid"><div class="row" ><div class="col-lg-4"></div><div class="col-lg-4" style="text-align:center">
+          <div class="content-section" >
+            <div ><h3 class="display-4">Login</h3></div><br>
+           <form method="post" class="form-control">
+    {% csrf_token %}
+    <fieldset class="form-group">
+         <legend class="border-bottom mb -4">
+             <div class="small">{{ form|crispy}}</div>
+         </legend>
+            </fieldset>
+               <div class="form-group">
+         <input type="submit" value="Login" class="btn btn-primary"><br><br>
+                   <small class="text-muted">
+                       <span> Need an account?<a class="ml-2" href="{% url 'register' %}"> Sign Up now</a></span>
+                  </small>
+    </div>
+           </form> </div></div><div class="col-lg-4"></div></div></div>
+<!--<span><a href="#" class="ml-4">Forgot Password</a></span>-->
+
+{% endblock %}
