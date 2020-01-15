@@ -1,7 +1,18 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<h1>hello</h1>
+<div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Questions</span>
+                <h3 class="page-title">Create Questions</h3>
+              </div>
+            </div>
+<form method="post" class="form-group" action="{% url 'tests' %}">
+    {% csrf_token %}
+    {{form.as_table}}
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
 
 
 {% endblock  %}

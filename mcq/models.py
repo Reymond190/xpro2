@@ -50,6 +50,7 @@ class MCQQuestion(Question):
 
 
 class Answer(models.Model):
+
     question = models.ForeignKey(MCQQuestion, verbose_name='Question', on_delete=models.CASCADE)
 
     content = models.CharField(max_length=1000,

@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Shards Dashboard Lite - Free Bootstrap Admin Template – DesignRevision</title>
+    <title>Testify</title>
     <meta name="description" content="A high-quality &amp; free Bootstrap admin dashboard template pack that comes with lots of templates and components.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -97,38 +97,39 @@
                   <span>Dashboard</span>
                 </a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link " href="components-blog-posts.html">
+                <a class="nav-link " href="{% url 'quiz_index' %}">
                   <i class="material-icons">vertical_split</i>
                   <span>Quizzes</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="add-new-post.html">
+                <a class="nav-link " href="{% url 'quiz_progress' %}">
                   <i class="material-icons">note_add</i>
                   <span>Progress/results</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="form-components.html">
+                <a class="nav-link " href="{% url 'tests' %}">
                   <i class="material-icons">view_module</i>
                   <span>Create Tests</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="tables.html">
+                <a class="nav-link active" href="{% url 'quiz_category_list_all' %}">
                   <i class="material-icons">table_chart</i>
-                  <span>Tables</span>
+                  <span>Explore Tests</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="user-profile-lite.html">
+                <a class="nav-link " href="{% url 'quiz_marking' %}">
                   <i class="material-icons">person</i>
-                  <span>Profile</span>
+                  <span>Marking</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="errors.html">
+                <a class="nav-link " href=#>
                   <i class="material-icons">error</i>
                   <span>Settings</span>
                 </a>
@@ -188,7 +189,7 @@
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" src="{% static 'images/avatars/0.jpg' %}" alt="User Avatar">
+                    <img class="user-avatar rounded-circle mr-2" src="{% static 'images/avatars/04.png' %}" alt="User Avatar">
                     {% if user.is_authenticated %}
                      <span class="d-none d-md-inline-block">{{ user.get_username }}</span>
                       </a>

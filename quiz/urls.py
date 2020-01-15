@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from .views import QuizListView, CategoriesListView,\
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList,\
-    QuizMarkingDetail, QuizDetailView, QuizTake, index, one, register
+    QuizMarkingDetail, QuizDetailView, QuizTake, index, tests, register,sessionview
 from django.urls import path, include
 
 from django.contrib.auth import views as auth_views
@@ -13,6 +13,8 @@ urlpatterns = [         url(regex=r'^$', view=index, name='index'),
                         path('register/', register, name='register'),
                         path('profile/',index,name='profile'),
                         path('accounts/profile/',index,name='profile'),
+                        path('tests/',tests,name='tests'),
+                        path('exam/',sessionview,name='exam'),
                        url(regex=r'^quizzes/$',
                            view=QuizListView.as_view(),
                            name='quiz_index'),
@@ -46,5 +48,5 @@ urlpatterns = [         url(regex=r'^$', view=index, name='index'),
                            view=QuizTake.as_view(),
                            name='quiz_question'),
 
-                        path('one/',one,name='one')
+
 ]

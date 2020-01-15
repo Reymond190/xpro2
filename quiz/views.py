@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_control
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import FormView
-from .forms import QuestionForm
+from .forms import QuestionForm, myTestForm
 from .models import Quiz, Category, Progress, Sitting, Question
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -275,11 +275,11 @@ def index(request):
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required
-def one(request):
-    form = myform
+def tests(request):
+    form = myTestForm
 
     if request.method == 'POST':
-        form = myform(request.POST)
+        form = myTestForm(request.POST)
         form.save(commit=True)
         print('just saved!!!')
     print('not inside if')
@@ -301,3 +301,10 @@ def register(request):
         form = UserRegisterForm()
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
+
+def sessionview(request):
+    request.session['name'] = 'ray201@'
+    return render(request,'session.html')
+
+
