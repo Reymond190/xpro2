@@ -1,22 +1,41 @@
-<html>
-<head>
-
-</head>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
 <body>
-<p>hello</p>
-<div id="count">Start</div>
-</body>
-</html>
 
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<h1 id = 'demo' class=" display-4">Display 4</h1>
 <script>
-    var count = 15;
-    var interval = setInterval(function(){
-  document.getElementById('count').innerHTML=count;
-  count--;
-  if (count === 0){
-    clearInterval(interval);
-    document.getElementById('count').innerHTML='Done';
-    // or...
-    alert("You're out of time!");
-  }
-}, 1000);</script>
+var deadline = new Date();
+deadline.setTime(deadline.getTime() + (1 * 10 * 1000));
+var x = setInterval(function() {
+var now = new Date().getTime();
+if (deadline>now){
+    var t = deadline - now;
+    var days = Math.floor(t / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60));
+    var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((t % (1000 * 60)) / 1000);
+    document.getElementById("demo").innerHTML = days + "d "
+    + hours + "h " + minutes + "m " + seconds + "s ";
+}
+else{
+    clearInterval(x);
+    $(document).ready(function(){
+        $.ajax({url: '{% url "ajax" %}',
+              data: {
+                dataa: 'hello ray you did it',
+            }
+        });
+    });
+    document.getElementById("demo").innerHTML = "EXPIRED";
+}
+
+
+}, 1000);
+</script>
+
+
+
+</body>
+{% endblock  %}

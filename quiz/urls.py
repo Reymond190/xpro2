@@ -4,17 +4,21 @@ from .views import QuizListView, CategoriesListView,\
     QuizMarkingDetail, QuizDetailView, QuizTake, index, tests, register,sessionview
 from django.urls import path, include
 
+
 from django.contrib.auth import views as auth_views
 
 
-urlpatterns = [         url(regex=r'^$', view=index, name='index'),
+urlpatterns = [         path('',index,name='home'),
                         path('login/', auth_views.LoginView.as_view(), name='login1'),
                         path('logout/', auth_views.LogoutView.as_view(), name='logout1'),
                         path('register/', register, name='register'),
                         path('profile/',index,name='profile'),
                         path('accounts/profile/',index,name='profile'),
+                        path('accounts/login/',auth_views.LoginView.as_view(),name='profile'),
                         path('tests/',tests,name='tests'),
-                        path('exam/',sessionview,name='exam'),
+                        path('exam/',include('timedtest.urls'),name='exam'),
+
+
                        url(regex=r'^quizzes/$',
                            view=QuizListView.as_view(),
                            name='quiz_index'),

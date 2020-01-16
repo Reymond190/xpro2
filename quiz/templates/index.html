@@ -7,7 +7,7 @@
                 <h3 class="page-title">Create Quiz</h3>
               </div>
             </div>
-<form method="post" class="form-group" action="{% url 'index' %}">
+<form method="post" class="form-group" action="{% url 'home' %}">
     {% csrf_token %}
     {{form|crispy}}
     <input type="submit" value="Submit" class="btn btn-primary">

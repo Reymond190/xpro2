@@ -43,9 +43,15 @@
 {% if question %}
 
 {% if progress %}
-<div style="float: right;">
+		<div class = 'col-sm-1' style="float: right">
+			<div style="float: right;" >
 {% trans "Question" %} {{ progress.0|add:1 }} {% trans "of" %} {{ progress.1 }}
 </div>
+<div>
+<h6 id = 'demo' class="">Time</h6>
+</div>
+		</div>
+
 {% endif %}
 
 <p>
